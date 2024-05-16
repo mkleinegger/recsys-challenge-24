@@ -10,8 +10,16 @@ packages = [
     { include = "ebrec", from = "src"}
 ]
 
+[tool.poetry.scripts]
+main = "group_33.main:main"
+
 [tool.poetry.dependencies]
 python = "^3.11"
+jupyter = "^1.0.0"
+transformers = "^4.40.2"
+polars = "^0.20.26"
+tensorflow = "^2.16.1"
+torch = "^2.3.0"
 
 
 [build-system]
