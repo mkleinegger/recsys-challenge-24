@@ -14,15 +14,16 @@ packages = [
 main = "group_33.main:main"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-jupyter = "^1.0.0"
-transformers = "^4.40.2"
-polars = "^0.20.26"
-tensorflow = "^2.16.1"
-torch = "^2.3.0"
-scikit-learn = "^1.4.2"
-pyyaml = "^6.0.1"
-tqdm = "^4.66.4"
+python = "~3.11"
+jupyter = "*"
+transformers = ">=4.30.0, <4.37.3"
+polars = "==0.20.8"
+tensorflow = ">=2.12, <2.16.0"
+torch = ">=2.0.0, <2.3.0"
+scikit-learn = "==1.4.0"
+numpy = ">=1.24.0, <1.26.1"
+pyyaml = "==6.0.1"
+tqdm = "*"
 
 
 [build-system]
