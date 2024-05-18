@@ -7,7 +7,7 @@ readme = "README.md"
 
 packages = [
     { include = "group_33", from = "src"},
-    { include = "ebrec", from = "src"}
+    { include = "ebrec", from = "ebnerd/src"}
 ]
 
 [tool.poetry.scripts]
@@ -20,6 +20,9 @@ transformers = "^4.40.2"
 polars = "^0.20.26"
 tensorflow = "^2.16.1"
 torch = "^2.3.0"
+scikit-learn = "^1.4.2"
+pyyaml = "^6.0.1"
+tqdm = "^4.66.4"
 
 
 [build-system]
