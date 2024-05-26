@@ -24,6 +24,7 @@ scikit-learn = "==1.4.0"
 numpy = ">=1.24.0, <1.26.1"
 pyyaml = "==6.0.1"
 tqdm = "*"
+recommenders = "^1.2.0"
 
 
 [build-system]
