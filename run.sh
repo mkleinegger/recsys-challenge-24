@@ -1,6 +1,7 @@
 # Install package and run it
 
-pip install dist/wheel
+
+pip install dist/group_33-*.whl
 
 # now, either execute entrypoint:
 # python -m group_33.main
