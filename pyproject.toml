@@ -16,9 +16,9 @@ main = "group_33.main:main"
 [tool.poetry.dependencies]
 python = "~3.11"
 jupyter = "*"
-transformers = ">=4.30.0, <4.37.3"
+transformers = {version=">=4.30.0, <4.37.3", extras=["and-cuda"]}
 polars = "==0.20.8"
-tensorflow = ">=2.12, <2.16.0"
+tensorflow = {version=">=2.12, <2.16.0", extras=["and-cuda"]}
 torch = ">=2.0.0, <2.3.0"
 scikit-learn = "==1.4.0"
 numpy = ">=1.24.0, <1.26.1"
@@ -28,6 +28,7 @@ recommenders = "~1.2"
 # lightfm = "~1.16"
 
 [tool.poetry.extras]
+# tensorflow = ["and-cuda"]
 # gpu = ["recommenders"]
 
 
