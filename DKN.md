@@ -24,6 +24,6 @@ Datset=SMALL, History=5, Epochs=10, RUNTIME=1h7min:
 
 Datset=SMALL, History=50, Epochs=10, RUNTIME=:
 ```json
-
+{'auc': 0.6196, 'group_auc': 0.6129, 'mean_mrr': 0.4146, 'ndcg@5': 0.4557, 'ndcg@10': 0.5228}
 ```
 
