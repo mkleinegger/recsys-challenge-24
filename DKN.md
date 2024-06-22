@@ -1,6 +1,9 @@
 # DKN
 
-## Performance:
+## Performance
+
+### With Glove Embeddings and no entities
+
 Testrun without entities, default (english) glove embeddings with following parameters.
 Dataset=DEMO, History=5, Epochs=2:
 ```json
@@ -27,3 +30,10 @@ Datset=SMALL, History=50, Epochs=10, RUNTIME=:
 {'auc': 0.6196, 'group_auc': 0.6129, 'mean_mrr': 0.4146, 'ndcg@5': 0.4557, 'ndcg@10': 0.5228}
 ```
 
+
+### With Danish Word2Vec Embeddings and Wikidata Entity Embeddings
+
+Datset=SMALL, History=50, Epochs=10, RUNTIME=:
+```json
+{'auc': 0.6834, 'group_auc': 0.6798, 'mean_mrr': 0.4783, 'ndcg@5': 0.5241, 'ndcg@10': 0.5789}
+```
