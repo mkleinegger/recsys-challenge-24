@@ -1,10 +1,20 @@
-Add your Documantion here the description can be found on [TUWEL](https://tuwel.tuwien.ac.at/mod/page/view.php?id=2281417)
+Add your Documantion here, the description can be found on [TUWEL](https://tuwel.tuwien.ac.at/mod/page/view.php?id=2281417)
 
 # Recommender Systems Project of Group 33
+To run the project after the hand-in, calling run.sh as described in the section "Hand In" should
+suffice.
+The provided wheel file can also alternatively be installed in a separate environment, the code
+needed to to do that is also contained in the run.sh, but commented.
+
+Execution permissions for run.sh are already set, you can redo them in case they are missing using:
+```bash
+chmod +x run.sh
+```
 
 ## Setup & Installation
 Environment management is done using poetry, deployment is done by installing a
 pre-built wheel file.
+
 
 ### Development:
 Make sure poetry and python are installed, the python version hast to match
@@ -29,4 +39,28 @@ and install it on the target host using:
 pip install dist/<name-of-wheel>.whl
 ```
 
-The installation and runnign is already automated by the run.sh script.
+The installation and running is already automated by the run.sh script.
+
+### Hand In:
+A wheel is already built, the installation is handled using [run.sh](./run.sh).
+
+Call run.sh to execute dkn:
+```shell
+./run.sh dkn
+```
+For the second model, lstur:
+```shell
+./run.sh lstur
+```
+
+If the predictions should not be done using the pretrained model
+but rather be retrained, call the script in the following way:
+```shell
+./run.sh dkn -t
+```
+This sets the TRAIN environment variable, which triggers the training phase inside the
+executed notebook.
+Equivalently this can also be done for lstur:
+```shell
+./run.sh lstur -t
+```
