@@ -45,9 +45,6 @@ else
 fi
 
 echo "running notebook at location: $NB_PATH with TRAIN=$TRAIN."
-# or execute notebook directly:
-# nbconvert --execute /path/to/notebook
-#
-# or:
-jupyter execute --inplace $NB_PATH
+
+jupyter nbconvert $NB_PATH --to ipynb --inplace --execute
 echo "Checkout the notebook at $NB_PATH to see more detailed results of the run."
