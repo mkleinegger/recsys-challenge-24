@@ -25,7 +25,7 @@ Datset=SMALL, History=5, Epochs=10, RUNTIME=1h7min:
 {'auc': 0.545, 'group_auc': 0.5407, 'mean_mrr': 0.3359, 'ndcg@5': 0.3734, 'ndcg@10': 0.4546}
 ```
 
-Datset=SMALL, History=50, Epochs=10, RUNTIME=:
+Datset=SMALL, History=50, Epochs=10, RUNTIME=0h57min:
 ```json
 {'auc': 0.6196, 'group_auc': 0.6129, 'mean_mrr': 0.4146, 'ndcg@5': 0.4557, 'ndcg@10': 0.5228}
 ```
