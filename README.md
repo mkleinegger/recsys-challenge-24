@@ -73,8 +73,8 @@ Equivalently this can also be done for lstur:
 ./run.sh lstur -t
 ```
 
-## Predictions and Model
-The pretrained models are saved in the [models](~/shared/194.035-2024S/groups/Gruppe_33/Group_33/models), of the shared directory. Each model has its separate sub directory, which contains the weights and all other information required to load the model.
+## Predictions and Models
 
+The pretrained models are saved in the [submission/models](~/shared/194.035-2024S/groups/Gruppe_33/Group_33/submission/models) folder of the shared directory. Each model has its separate sub directory, which contains the weights and all other information required to load the model.
 
-Predictions of each model are contained in the [submission](~/shared/194.035-2024S/groups/Gruppe_33/Group_33/submission) directory in the format expected by the challenge. 
+Predictions of each model are contained in the [submission/predictions](~/shared/194.035-2024S/groups/Gruppe_33/Group_33/submission/predictions) directory in the format expected by the challenge. 
