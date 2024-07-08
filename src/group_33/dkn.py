@@ -13,7 +13,7 @@ LOG = logging.getLogger(__name__)
 entity_embeddings = {}
 context_embeddings = {}
 word2vec: dict | None = None
-nlp = dacy.load("large")
+nlp = None
 
 
 def transform_behaviors(behaviors_raw: pl.LazyFrame, skip_impression=False):
@@ -56,6 +56,9 @@ def transform_history(*input_files):
 
 
 def tokenize_articles(articles_file: Path, tokenized_articles_file: Path):
+    global nlp
+    if not nlp:
+        nlp = dacy.load("large")
     tokenizer = RegexpTokenizer(r"\w+")
     articles = (pl.scan_parquet(articles_file)
         .select("article_id", "title")
@@ -166,6 +169,7 @@ def create_feature_file(word2vec_path, tokenized_articles_file, test_tokenized_a
         .collect()
     )["entities"]
 
+    global word2vec
     if not word2vec:
         word2vec = KeyedVectors.load_word2vec_format(word2vec_path, binary=True)
 
@@ -200,6 +204,7 @@ def create_feature_file(word2vec_path, tokenized_articles_file, test_tokenized_a
 
 
 def get_word_embedding(word):
+    global word2vec
     return word2vec[word] if word in word2vec else None
 
 
