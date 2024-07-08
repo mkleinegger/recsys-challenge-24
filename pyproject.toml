@@ -7,7 +7,8 @@ readme = "README.md"
 
 packages = [
     { include = "group_33", from = "src"},
-    { include = "ebrec", from = "ebnerd/src"}
+    { include = "ebrec", from = "ebnerd-benchmark/src"}
+    { include = "ebrec", from = "ebnerd-benchmark/src"}
 ]
 
 [tool.poetry.scripts]
