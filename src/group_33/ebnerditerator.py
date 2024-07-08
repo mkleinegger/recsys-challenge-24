@@ -6,27 +6,23 @@ from recommenders.models.newsrec.newsrec_utils import word_tokenize
 
 
 class EbnerdIterator(MINDIterator):
-    """Train data loader for NAML model.
+    """Train data loader for LSTUR model.
     The model require a special type of data format, where each instance contains a label, impresion id, user id,
-    the candidate news articles and user's clicked news article. Articles are represented by title words,
-    body words, verts and subverts.
+    the inviewed articles ids and user's clicked article ids. Articles are represented by category, title words and
+    body words and url.
 
     Iterator will not load the whole data into memory. Instead, it loads data into memory
     per mini-batch, so that large files can be used as input data.
-
-    Attributes:
-        col_spliter (str): column spliter in one line.
-        ID_spliter (str): ID spliter in one line.
-        batch_size (int): the samples num in one batch.
-        title_size (int): max word num in news title.
-        his_size (int): max clicked news num in user click history.
-        npratio (int): negaive and positive ratio used in negative sampling. -1 means no need of negtive sampling.
     """
 
     def init_news(self, news_file):
-        """init news information given news file, such as news_title_index and nid2index.
+        """
+        init article information given articles file, because we override the
+        MINDIterator we have to map all news related things to article to be able 
+        to use the same functions and stay within the termonology of the ACM RecSys 
+        Challenge 24.
         Args:
-            news_file: path of news file
+            news_file: path of articles file
         """
 
         self.nid2index = {}
