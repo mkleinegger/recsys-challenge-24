@@ -28,7 +28,7 @@ fi
 if [ "$1" = "lstur" ]; then
     NB_PATH="./notebooks/lstur.ipynb"
 elif [ "$1" = "nrms" ]; then
-    NB_PATH="./notebooks/nrms_ebnerd.ipynb"
+    NB_PATH="./notebooks/nrms.ipynb"
 else
     NB_PATH="./notebooks/dkn.ipynb"
 fi
