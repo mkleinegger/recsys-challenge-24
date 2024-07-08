@@ -44,10 +44,18 @@ The installation and running is already automated by the run.sh script.
 ### Hand In:
 A wheel is already built, the installation is handled using [run.sh](./run.sh).
 
-Call run.sh to execute dkn:
+Create a virtual environment and load all dependencies:
+```shell
+python -m venv venv_group_33
+source venv_group_33/bin/activate
+pip install dist/group_33-*.whl
+```
+
+Then call run.sh to execute dkn:
 ```shell
 ./run.sh dkn
 ```
+
 For the second model, lstur:
 ```shell
 ./run.sh lstur
