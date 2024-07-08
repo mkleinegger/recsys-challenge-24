@@ -11,13 +11,13 @@
 # example: ./run.sh lstur -t
 
 # venv creation:
-if [ -z "$VIRTUAL_ENV" ]; then
-    python -m venv venv_group_33
-    source venv_group_33/bin/activate
-
-    # install dependencies & package
-    pip install dist/group_33-*.whl
-fi
+# if [ -z "$VIRTUAL_ENV" ]; then
+#     python -m venv venv_group_33
+#     source venv_group_33/bin/activate
+#
+#     # install dependencies & package
+#     pip install dist/group_33-*.whl
+# fi
 
 # Setup environment variables:
 # if TRAIN is set, the model is trained before prediction,
