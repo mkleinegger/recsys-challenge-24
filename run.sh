@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Install dependencies and predict using one of the
 # 2 implemented models (besides baseline): lstur and dkn
@@ -11,12 +11,13 @@
 # example: ./run.sh lstur -t
 
 # venv creation:
-# python -m venv venv_group_33
-# source venv_group_33/bin/activate
+if [ -z "$VIRTUAL_ENV" ]; then
+    python -m venv venv_group_33
+    source venv_group_33/bin/activate
 
-
-# install dependencies & package
-pip install dist/group_33-*.whl
+    # install dependencies & package
+    pip install dist/group_33-*.whl
+fi
 
 # now, either execute entrypoint:
 # python -m group_33.main
@@ -32,6 +33,8 @@ pip install dist/group_33-*.whl
 # set model
 if [ "$1" = "lstur" ]; then
     NB_PATH="./notebooks/lstur.ipynb"
+elif [ "$1" = "nrms" ]; then
+    NB_PATH="./notebooks/nrms_ebnerd.ipynb"
 else
     NB_PATH="./notebooks/dkn.ipynb"
 fi
@@ -43,6 +46,7 @@ else
     export TRAIN=
 fi
 
+echo $(which python)
 # NB_PATH="./notebooks/tst.ipynb"
 echo "running notebook at location: $NB_PATH with TRAIN=$TRAIN."
 
