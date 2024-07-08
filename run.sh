@@ -12,11 +12,11 @@
 
 # venv creation:
 if [ -z "$VIRTUAL_ENV" ]; then
-    # python -m venv venv_group_33
-    # source venv_group_33/bin/activate
+    python -m venv venv_group_33
+    source venv_group_33/bin/activate
 
     # install dependencies & package
-    # pip install dist/group_33-*.whl
+    pip install dist/group_33-*.whl
 fi
 
 # Setup environment variables:
