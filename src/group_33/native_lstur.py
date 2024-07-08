@@ -3,7 +3,6 @@ import polars as pl
 import numpy as np
 import re
 
-import group_33.constants as Constants
 from recommenders.models.newsrec.newsrec_utils import word_tokenize
 
 pl.Config.set_tbl_rows(100)
