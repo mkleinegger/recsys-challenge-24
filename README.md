@@ -61,9 +61,9 @@ For the other models, it can be done similarly, e.g. for LSTUR:
 ./run.sh lstur
 ```
 
-And for KNRM:
+And for NRMS:
 ```shell
-./run.sh knrm
+./run.sh nrms
 ```
 
 If the predictions should not be done using the pretrained model
@@ -80,9 +80,9 @@ Equivalently this can also be done for LSTUR:
 ./run.sh lstur -t
 ```
 
-And for KNRM:
+And for NRMS:
 ```shell
-./run.sh knrm -t
+./run.sh nrms -t
 ```
 
 ## Predictions and Models
