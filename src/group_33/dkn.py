@@ -1,4 +1,3 @@
-from os import PathLike
 from pathlib import Path
 from nltk import RegexpTokenizer
 from requests import HTTPError, get
@@ -9,14 +8,34 @@ import dacy
 from gensim.models import KeyedVectors
 
 
+# Set up logging
 LOG = logging.getLogger(__name__)
+
+# Dictionary used to cache entity embeddings
 entity_embeddings = {}
+
+# Dictionary used to cache context embeddings
 context_embeddings = {}
+
+# Word2Vec model used to retrieve word embeddings
 word2vec: dict | None = None
+
+# Spacy model used to retrieve entity embeddings
 nlp = None
 
 
 def transform_behaviors(behaviors_raw: pl.LazyFrame, skip_impression=False):
+    """
+    Transform the behaviors_raw LazyFrame to the required format for the DKN model.
+    
+    Args:
+        behaviors_raw: The behaviors_raw LazyFrame containing the raw behaviors data.
+        skip_impression: Whether to skip the impression_id column in the output.
+
+    Returns:
+        The transformed behaviors data.
+    """
+
     LOG.info(f"Starting transform_behaviors")
     df = (behaviors_raw
         .select('article_ids_inview', 'article_ids_clicked', 'impression_id', 'user_id')
@@ -43,6 +62,16 @@ def transform_behaviors(behaviors_raw: pl.LazyFrame, skip_impression=False):
 
 
 def transform_history(*input_files):
+    """
+    Transform the history data to the required format for the DKN model.
+    
+    Args:
+        input_files: The input files containing the history data.
+
+    Returns:
+        The transformed history data as a LazyFrame.
+    """
+
     LOG.info(f"Starting transform_history for input files: {input_files}")
     df = (
         pl.concat([pl.scan_parquet(file) for file in input_files])
@@ -56,6 +85,17 @@ def transform_history(*input_files):
 
 
 def tokenize_articles(articles_file: Path, tokenized_articles_file: Path):
+    """
+    Tokenize the articles and save the tokenized articles to a new file.
+    Does NER in combination with NEL to get the WikiData entity IDs for each
+    token if it is a part of an entity.
+
+    Args:
+        articles_file: The file containing the articles data.
+        tokenized_articles_file: The file to save the tokenized articles to.
+    """
+
+    LOG.info(f"Starting tokenize_articles for input file: {articles_file}")
     global nlp
     if not nlp:
         nlp = dacy.load("large")
@@ -80,6 +120,16 @@ def tokenize_articles(articles_file: Path, tokenized_articles_file: Path):
 
 
 def get_entity_embedding(entity: str):
+    """
+    Get the entity embedding for the given entity.
+
+    Args:
+        entity: The entity to get the embedding for.
+
+    Returns:
+        The entity embedding as a numpy array.
+    """
+
     if entity not in entity_embeddings:
         try:
             response = get(f'https://wembedder.toolforge.org/api/vector/{entity}')
@@ -96,6 +146,16 @@ def get_entity_embedding(entity: str):
 
 
 def get_context_embedding(entity: str):
+    """
+    Get the context embedding for the given entity.
+
+    Args:
+        entity: The entity to get the context embedding for.
+
+    Returns:
+        The context embedding as a numpy array.
+    """
+
     if entity not in context_embeddings:
         try:
             response = get(f'https://www.wikidata.org/w/rest.php/wikibase/v0/entities/items/{entity}/statements')
@@ -117,6 +177,18 @@ def get_context_embedding(entity: str):
 
 
 def create_embeddings(tokens, get_embedding, default_embedding=np.zeros(100)):
+    """
+    Create embeddings for the given tokens.
+
+    Args:
+        tokens: The tokens to create embeddings for.
+        get_embedding: The function to get the embedding for a token.
+        default_embedding: The default embedding to use if no embedding is found.
+
+    Returns:
+        The embeddings as numpy array and the token to ID mapping dictionary.
+    """
+
     embedding_tokens = [None]
     embeddings = [default_embedding]
 
@@ -134,6 +206,17 @@ def create_embeddings(tokens, get_embedding, default_embedding=np.zeros(100)):
 
 
 def entities_to_ids(entities, entity2id):
+    """
+    Convert the entities to their IDs.
+
+    Args:
+        entities: The entities to convert.
+        entity2id: The entity to ID mapping dictionary.
+
+    Returns:
+        The IDs of the entities.
+    """
+
     ids = []
 
     for entity in entities:
@@ -147,6 +230,24 @@ def entities_to_ids(entities, entity2id):
 
 
 def create_feature_file(word2vec_path, tokenized_articles_file, test_tokenized_articles_file, word_embeddings_file, entity_embeddings_file, context_embeddings_file, news_feature_file, doc_size):
+    """
+    Create the feature file for the DKN model along with the word, entity and
+    context embedding files.
+
+    Args:
+        word2vec_path: The path to the Word2Vec model.
+        tokenized_articles_file: The file containing the tokenized articles data.
+        test_tokenized_articles_file: The file containing the tokenized test articles data.
+        word_embeddings_file: The file to save the word embeddings to.
+        entity_embeddings_file: The file to save the entity embeddings to.
+        context_embeddings_file: The file to save the context embeddings to.
+        news_feature_file: The file to save the news feature to.
+        doc_size: The size of the document.
+
+    Returns:
+        The feature file for the DKN model.
+    """
+
     articles = pl.concat([
         pl.scan_parquet(tokenized_articles_file),
         pl.scan_parquet(test_tokenized_articles_file)
@@ -204,10 +305,30 @@ def create_feature_file(word2vec_path, tokenized_articles_file, test_tokenized_a
 
 
 def get_word_embedding(word):
+    """
+    Get the Word2Vec embedding for the given word.
+
+    Args:
+        word: The word to get the embedding for.
+
+    Returns:
+        The Word2Vec embedding as a numpy array.
+    """
+
     return word2vec[word] if word in word2vec else None
 
 
 def transform_behaviors_test(test_raw_file: str, indexed_behaviors_file: str, test_file: str):
+    """
+    Transform the test behaviors data to the required format for the DKN model
+    and save the indexed behaviors and test behaviors to new files.
+
+    Args:
+        test_raw_file: The file containing the test behaviors data.
+        indexed_behaviors_file: The file to save the indexed behaviors to.
+        test_file: The file to save the test behaviors to.
+    """
+
     LOG.info(f"Writing index behaviors data to: {indexed_behaviors_file}")
     indexed_behaviors = (pl
         .scan_parquet(test_raw_file)
@@ -240,6 +361,13 @@ def calculate_rankings(indexed_behaviors_file: str, scores_file: str):
 
     Calculate the rankings for the given score column and return the resulting LazyFrame which
     has the correct schema for a handin at the RecSys challenge (columns: impression_id, ranking).
+
+    Args:
+        indexed_behaviors_file: The file containing the indexed behaviors data.
+        scores_file: The file containing the scores data.
+
+    Returns:
+        The rankings as a LazyFrame.
     """
     rankings = (
         pl.concat([
