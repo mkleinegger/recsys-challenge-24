@@ -12,18 +12,12 @@
 
 # venv creation:
 if [ -z "$VIRTUAL_ENV" ]; then
-    python -m venv venv_group_33
-    source venv_group_33/bin/activate
+    # python -m venv venv_group_33
+    # source venv_group_33/bin/activate
 
     # install dependencies & package
-    pip install dist/group_33-*.whl
+    # pip install dist/group_33-*.whl
 fi
-
-# now, either execute entrypoint:
-# python -m group_33.main
-
-# or use entrypoint directly:
-# predict_dkn
 
 # Setup environment variables:
 # if TRAIN is set, the model is trained before prediction,
