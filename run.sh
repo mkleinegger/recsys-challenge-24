@@ -12,8 +12,7 @@
 
 # venv creation:
 # python -m venv venv_group_33
-# activate it
-# ./venv_group_33/bin/activate
+# source venv_group_33/bin/activate
 
 
 # install dependencies & package
@@ -33,8 +32,6 @@ pip install dist/group_33-*.whl
 # set model
 if [ "$1" = "lstur" ]; then
     NB_PATH="./notebooks/lstur.ipynb"
-elif [ "$1" = "nrms" ]; then
-    NB_PATH="./notebooks/nrms_ebnerd.ipynb"
 else
     NB_PATH="./notebooks/dkn.ipynb"
 fi
@@ -46,6 +43,7 @@ else
     export TRAIN=
 fi
 
+# NB_PATH="./notebooks/tst.ipynb"
 echo "running notebook at location: $NB_PATH with TRAIN=$TRAIN."
 
 jupyter nbconvert $NB_PATH --to ipynb --inplace --execute
