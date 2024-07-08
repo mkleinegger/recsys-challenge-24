@@ -51,14 +51,19 @@ source venv_group_33/bin/activate
 pip install dist/group_33-*.whl
 ```
 
-Then call run.sh to execute dkn:
+Then call run.sh to execute the prediction on the pretrained DKN model:
 ```shell
 ./run.sh dkn
 ```
 
-For the second model, lstur:
+For the other models, it can be done similarly, e.g. for LSTUR:
 ```shell
 ./run.sh lstur
+```
+
+And for KNRM:
+```shell
+./run.sh knrm
 ```
 
 If the predictions should not be done using the pretrained model
@@ -66,11 +71,18 @@ but rather be retrained, call the script in the following way:
 ```shell
 ./run.sh dkn -t
 ```
+
 This sets the TRAIN environment variable, which triggers the training phase inside the
 executed notebook.
-Equivalently this can also be done for lstur:
+
+Equivalently this can also be done for LSTUR:
 ```shell
 ./run.sh lstur -t
+```
+
+And for KNRM:
+```shell
+./run.sh knrm -t
 ```
 
 ## Predictions and Models
