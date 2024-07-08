@@ -204,7 +204,6 @@ def create_feature_file(word2vec_path, tokenized_articles_file, test_tokenized_a
 
 
 def get_word_embedding(word):
-    global word2vec
     return word2vec[word] if word in word2vec else None
 
 
