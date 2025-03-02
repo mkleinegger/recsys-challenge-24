@@ -1,6 +1,4 @@
-Add your Documantion here, the description can be found on [TUWEL](https://tuwel.tuwien.ac.at/mod/page/view.php?id=2281417)
-
-# Recommender Systems Project of Group 33
+# Recsys Challenge 2024 @ Recommender Systems (TUWien)
 To run the project after the hand-in, calling run.sh as described in the section "Hand In" should
 suffice.
 The provided wheel file can also alternatively be installed in a separate environment, the code
