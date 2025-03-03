@@ -1,4 +1,7 @@
 # Recsys Challenge 2024 @ Recommender Systems (TUWien)
+
+A report can be found under https://mkleinegger.github.io/recsys-challenge-24/report.pdf.
+
 To run the project after the hand-in, calling run.sh as described in the section "Hand In" should
 suffice.
 The provided wheel file can also alternatively be installed in a separate environment, the code
